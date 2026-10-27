@@ -1,46 +1,38 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>WUYI 梧藝｜服務與系統導航整合中心</title>
-  <meta name="description" content="WUYI 梧藝 系統整合入口：現貨漢堡盒、蛋糕預訂、公版蛋糕、花藝預約、門市收銀與報價系統。">
-  <meta name="theme-color" content="#18181b">
-
-  <!-- Google Fonts & Lucide Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- QRCode.js for generating QR codes on the fly -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WUYI 梧藝 • 門市櫃檯工作台</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #f5f6f8;
       --card-bg: #ffffff;
-      --card-border: #e2e8f0;
-      --card-hover-border: #cbd5e1;
-      --text-main: #0f172a;
-      --text-sub: #475569;
-      --text-muted: #94a3b8;
-      --primary: #2563eb;
-      --primary-light: #eff6ff;
-      --accent: #f59e0b;
-      --radius: 18px;
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    [data-theme="dark"] {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --card-border: #1f2937;
-      --card-hover-border: #374151;
-      --text-main: #f9fafb;
-      --text-sub: #9ca3af;
+      --primary: #2d5a43;
+      --primary-hover: #224432;
+      --primary-light: #eef5f1;
+      --text-main: #1f2937;
       --text-muted: #6b7280;
-      --primary: #3b82f6;
-      --primary-light: #1e293b;
+      --border: #e5e7eb;
+      --border-hover: #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+      
+      /* 類別配色 */
+      --color-cashier: #2563eb;
+      --color-cashier-bg: #eff6ff;
+      --color-flower: #db2777;
+      --color-flower-bg: #fdf2f8;
+      --color-burger: #d97706;
+      --color-burger-bg: #fffbeb;
+      --color-cake-custom: #7c3aed;
+      --color-cake-custom-bg: #f5f3ff;
+      --color-cake-week: #059669;
+      --color-cake-week-bg: #ecfdf5;
+      --color-quote: #0284c7;
+      --color-quote-bg: #f0f9ff;
     }
 
     * {
@@ -48,921 +40,1027 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
     }
 
     body {
-      font-family: "Plus Jakarta Sans", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text-main);
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       line-height: 1.5;
-      padding: 24px 16px 64px;
-      transition: background 0.3s ease, color 0.3s ease;
-      position: relative;
-      overflow-x: hidden;
     }
 
-    /* Ambient Background Glow */
-    .ambient-glow {
-      position: fixed;
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(244, 114, 182, 0.08) 50%, rgba(255, 255, 255, 0) 75%);
-      pointer-events: none;
-      z-index: 0;
+    /* 頂部標頭 */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: var(--shadow-sm);
     }
 
-    .container {
-      max-width: 1080px;
+    .header-container {
+      max-width: 1100px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Top Bar */
-    .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 28px;
-      padding: 4px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: var(--primary-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .brand-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 999px;
-      font-size: 13px;
+      font-size: 0.72rem;
       font-weight: 600;
-      color: var(--text-sub);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 999px;
     }
 
-    .live-dot {
+    .brand-text p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .status-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .live-clock {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #334155;
+    }
+
+    .live-clock-dot {
       width: 8px;
       height: 8px;
-      background: #10b981;
+      background-color: #10b981;
       border-radius: 50%;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.8; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
     }
 
-    .top-actions {
+    .target-mode-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .target-mode-toggle input {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary);
+    }
+
+    /* 主要內容區 */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 20px 40px;
+    }
+
+    /* 頂部快速提示列 */
+    .quick-tip-banner {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      font-size: 0.88rem;
+      color: #4b5563;
+    }
+
+    .quick-tip-banner kbd {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    /* 區塊標題 */
+    .section-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin: 22px 0 12px 4px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      color: var(--text-sub);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 16px;
+    .section-title:first-of-type {
+      margin-top: 0;
     }
 
-    .icon-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    /* Header Section */
-    .hero {
-      text-align: center;
-      margin-bottom: 36px;
-      padding: 10px 0;
-    }
-
-    .hero-logo-wrap {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 68px;
-      height: 68px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-      margin-bottom: 16px;
-      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
-      color: #fff;
-      font-size: 32px;
-    }
-
-    .hero-title {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      color: var(--text-main);
-    }
-
-    .hero-subtitle {
-      font-size: 15px;
-      color: var(--text-sub);
-      max-width: 580px;
-      margin: 0 auto 18px;
-    }
-
-    .github-link-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(148, 163, 184, 0.1);
-      transition: var(--transition);
-    }
-
-    .github-link-pill:hover {
-      color: var(--text-main);
-      background: rgba(148, 163, 184, 0.2);
-    }
-
-    /* Search & Filter Bar */
-    .controls-wrap {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 12px 16px;
-      margin-bottom: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    }
-
-    @media (min-width: 640px) {
-      .controls-wrap {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-
-    .search-box {
-      position: relative;
-      flex: 1;
-      max-width: 380px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 9px 12px 9px 36px;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      background: var(--bg);
-      color: var(--text-main);
-      font-size: 14px;
-      outline: none;
-      transition: var(--transition);
-    }
-
-    .search-input:focus {
-      border-color: var(--primary);
-      background: var(--card-bg);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    .filter-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .pill-btn {
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--text-sub);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .pill-btn:hover {
-      background: var(--bg);
-      color: var(--text-main);
-    }
-
-    .pill-btn.active {
-      background: var(--primary-light);
-      color: var(--primary);
-      border-color: rgba(59, 130, 246, 0.2);
-    }
-
-    /* Cards Grid */
+    /* 卡片網格 */
     .grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 16px;
     }
 
-    @media (min-width: 640px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .service-card {
+    .card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: var(--transition);
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: all 0.18s ease-in-out;
     }
 
-    .service-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--card-hover-border);
-      box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.06);
-    }
-
-    .service-card.is-wip {
-      border-style: dashed;
-    }
-
-    /* Card Accent Stripe */
-    .card-stripe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
 
     .card-top {
       display: flex;
       align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 12px;
     }
 
-    .icon-box {
+    .card-icon {
       width: 48px;
       height: 48px;
-      border-radius: 14px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      transition: transform 0.2s ease;
+      font-size: 26px;
+      flex-shrink: 0;
     }
 
-    .service-card:hover .icon-box {
-      transform: scale(1.08);
+    .card-header-info {
+      flex: 1;
+      min-width: 0;
     }
 
-    .badge-pill {
-      font-size: 11.5px;
+    .card-tags {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .badge-category {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
+
+    .badge-hotkey {
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 999px;
-      letter-spacing: 0.02em;
-    }
-
-    .badge-active {
-      background: #ecfdf5;
-      color: #059669;
-      border: 1px solid #a7f3d0;
-    }
-
-    [data-theme="dark"] .badge-active {
-      background: #064e3b;
-      color: #6ee7b7;
-      border-color: #047857;
-    }
-
-    .badge-wip {
-      background: #fffbeb;
-      color: #d97706;
-      border: 1px solid #fde68a;
-    }
-
-    [data-theme="dark"] .badge-wip {
-      background: #78350f;
-      color: #fcd34d;
-      border-color: #92400e;
-    }
-
-    .card-body {
-      margin-bottom: 18px;
-      flex-grow: 1;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 1px 6px;
+      border-radius: 4px;
     }
 
     .card-title {
-      font-size: 17px;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 6px;
+      color: #111827;
       line-height: 1.35;
+      margin-bottom: 2px;
     }
 
     .card-desc {
-      font-size: 13.5px;
-      color: var(--text-sub);
-      line-height: 1.55;
-      margin-bottom: 12px;
-      min-height: 42px;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 4px;
-    }
-
-    .tag-item {
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 6px;
-      background: var(--bg);
+      font-size: 0.86rem;
       color: var(--text-muted);
-      border: 1px solid var(--card-border);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      flex: 1;
     }
 
-    /* Card Action Footer */
-    .card-footer {
+    .card-actions {
       display: flex;
       gap: 8px;
-      padding-top: 14px;
-      border-top: 1px solid var(--card-border);
+      margin-top: auto;
     }
 
-    .btn-main {
+    .btn-primary {
       flex: 1;
-      display: inline-flex;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 13.5px;
-      font-weight: 700;
-      text-decoration: none;
-      color: #fff;
-      background: var(--primary);
-      transition: var(--transition);
-      border: none;
+      transition: background-color 0.15s ease;
       cursor: pointer;
+      border: none;
+      outline: none;
     }
 
-    .btn-main:hover {
-      opacity: 0.92;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    .btn-primary:active {
+      transform: scale(0.99);
     }
 
-    .btn-main.is-wip-btn {
-      background: #e2e8f0;
-      color: #64748b;
-    }
-
-    [data-theme="dark"] .btn-main.is-wip-btn {
-      background: #334155;
-      color: #94a3b8;
-    }
-
-    .btn-main.is-wip-btn:hover {
-      background: #cbd5e1;
-      color: #334155;
-    }
-
-    .btn-sub {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      background: var(--bg);
-      color: var(--text-sub);
-      display: inline-flex;
+    .btn-tool {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #475569;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      display: flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
       cursor: pointer;
-      transition: var(--transition);
-      font-size: 14px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
     }
 
-    .btn-sub:hover {
+    .btn-tool:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #cbd5e1;
+    }
+
+    .btn-tool:active {
+      background: #e2e8f0;
+    }
+
+    /* 各卡片客製化主題配色 */
+    .card-cashier .card-icon { background: var(--color-cashier-bg); color: var(--color-cashier); }
+    .card-cashier .badge-category { background: var(--color-cashier-bg); color: var(--color-cashier); }
+    .card-cashier .btn-primary { background: #1d4ed8; }
+    .card-cashier .btn-primary:hover { background: #1e40af; }
+
+    .card-flower .card-icon { background: var(--color-flower-bg); color: var(--color-flower); }
+    .card-flower .badge-category { background: var(--color-flower-bg); color: var(--color-flower); }
+    .card-flower .btn-primary { background: #be185d; }
+    .card-flower .btn-primary:hover { background: #9d174d; }
+
+    .card-burger .card-icon { background: var(--color-burger-bg); color: var(--color-burger); }
+    .card-burger .badge-category { background: var(--color-burger-bg); color: var(--color-burger); }
+    .card-burger .btn-primary { background: #b45309; }
+    .card-burger .btn-primary:hover { background: #92400e; }
+
+    .card-cake-custom .card-icon { background: var(--color-cake-custom-bg); color: var(--color-cake-custom); }
+    .card-cake-custom .badge-category { background: var(--color-cake-custom-bg); color: var(--color-cake-custom); }
+    .card-cake-custom .btn-primary { background: #6d28d9; }
+    .card-cake-custom .btn-primary:hover { background: #5b21b6; }
+
+    .card-cake-week .card-icon { background: var(--color-cake-week-bg); color: var(--color-cake-week); }
+    .card-cake-week .badge-category { background: var(--color-cake-week-bg); color: var(--color-cake-week); }
+    .card-cake-week .btn-primary { background: #047857; }
+    .card-cake-week .btn-primary:hover { background: #065f46; }
+
+    .card-quote .card-icon { background: var(--color-quote-bg); color: var(--color-quote); }
+    .card-quote .badge-category { background: var(--color-quote-bg); color: var(--color-quote); }
+    .card-quote .btn-primary { background: #0284c7; }
+    .card-quote .btn-primary:hover { background: #0369a1; }
+
+    /* 櫃檯輔助工具面板 (交接備忘錄) */
+    .counter-tools-section {
+      margin-top: 28px;
+    }
+
+    .tool-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tool-box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .tool-box-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tool-memo-area {
+      width: 100%;
+      height: 90px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      color: #374151;
+      resize: vertical;
+      outline: none;
+      background: #fafafa;
+    }
+
+    .tool-memo-area:focus {
+      background: #ffffff;
       border-color: var(--primary);
-      color: var(--primary);
-      background: var(--card-bg);
     }
 
-    /* Modal for QR Code */
-    .modal-overlay {
+    .tool-memo-status {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* QR Code 彈窗 Modal */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(15, 23, 42, 0.6);
       backdrop-filter: blur(4px);
-      display: none;
+      z-index: 100;
+      display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
       padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
     }
 
-    .modal-overlay.active {
-      display: flex;
+    .modal-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .modal-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 24px;
-      width: 100%;
+    .qr-modal {
+      background: #ffffff;
+      border-radius: 16px;
       max-width: 360px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
       text-align: center;
-      position: relative;
-      animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.95);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes modalIn {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    .modal-backdrop.show .qr-modal {
+      transform: scale(1);
     }
 
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: transparent;
-      border: none;
+    .qr-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .qr-subtitle {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .qr-frame {
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .qr-image {
+      width: 200px;
+      height: 200px;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .qr-url-text {
+      font-size: 0.78rem;
+      color: #64748b;
+      word-break: break-all;
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 18px;
+    }
+
+    .qr-modal-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-modal-close {
+      flex: 1;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
       cursor: pointer;
     }
 
-    .qr-container {
-      margin: 16px auto;
-      padding: 14px;
-      background: #ffffff;
-      border-radius: 14px;
-      display: inline-block;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    .btn-modal-close:hover {
+      background: #e2e8f0;
     }
 
-    .modal-url {
-      font-size: 12px;
-      color: var(--text-muted);
-      word-break: break-all;
-      background: var(--bg);
-      padding: 8px 10px;
+    .btn-modal-copy {
+      flex: 1;
+      background: var(--primary);
+      border: none;
+      color: #ffffff;
+      padding: 10px;
       border-radius: 8px;
-      margin-top: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
     }
 
-    /* Toast Notification */
-    .toast {
+    .btn-modal-copy:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Toast 通知 */
+    #toast {
       position: fixed;
       bottom: 24px;
       left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #1e293b;
-      color: #fff;
-      padding: 10px 20px;
+      transform: translateX(-50%) translateY(100px);
+      background: #1f2937;
+      color: #ffffff;
+      padding: 12px 24px;
       border-radius: 999px;
-      font-size: 13.5px;
-      font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 9999;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 120;
     }
 
-    .toast.show {
+    #toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
 
-    /* Footer */
-    .footer {
+    /* 頁尾 */
+    footer {
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+      padding: 16px 24px;
       text-align: center;
-      margin-top: 50px;
-      padding-top: 24px;
-      border-top: 1px solid var(--card-border);
+      font-size: 0.84rem;
       color: var(--text-muted);
-      font-size: 13px;
     }
 
-    .footer a {
-      color: var(--text-sub);
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
+    @media (max-width: 640px) {
+      header {
+        padding: 12px 16px;
+      }
+      .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .status-section {
+        width: 100%;
+        justify-content: space-between;
+      }
+      main {
+        padding: 14px 14px 28px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-tip-banner {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="ambient-glow"></div>
 
-  <div class="container">
-    <!-- Top Bar -->
-    <header class="top-bar">
-      <div class="brand-badge">
-        <span class="live-dot"></span>
-        <span>WUYI 梧藝 • 系統就緒</span>
+  <!-- 頂部資訊列 -->
+  <header>
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo">🌿</div>
+        <div class="brand-text">
+          <h1>WUYI 梧藝 <span class="brand-badge">櫃檯入口</span></h1>
+          <p>門市服務導航 • 一鍵快速直達各功能系統</p>
+        </div>
       </div>
-      <div class="top-actions">
-        <button class="icon-btn" id="themeToggle" title="切換深淺模式" onclick="toggleTheme()">🌓</button>
-        <button class="icon-btn" title="分享本頁 QR Code" onclick="openQrModal('WUYI 梧藝 系統整合中心', window.location.href)">📱</button>
+      <div class="status-section">
+        <div class="live-clock" id="liveClock" title="櫃檯即時時鐘">
+          <span class="live-clock-dot"></span>
+          <span id="clockDate">--月--日 (週-)</span>
+          <strong id="clockTime">--:--:--</strong>
+        </div>
+        <label class="target-mode-toggle" title="勾選後點擊將另開新分頁，避免蓋過當前工作畫面">
+          <input type="checkbox" id="openNewTab" checked>
+          <span>另開新分頁</span>
+        </label>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- Hero Header -->
-    <section class="hero">
-      <div class="hero-logo-wrap">
-        🌿
+  <!-- 主操作區 -->
+  <main>
+
+    <!-- 櫃檯操作小提示 -->
+    <div class="quick-tip-banner">
+      <div>
+        💡 <strong>櫃檯快捷操作：</strong>鍵盤按數字鍵 <kbd>1</kbd> ~ <kbd>6</kbd> 秒開系統；點擊<strong>「QR Code」</strong>可展示給現場客人手機掃碼。
       </div>
-      <h1 class="hero-title">WUYI 梧藝 整合導航中心</h1>
-      <p class="hero-subtitle">全方位統整門市蛋糕預約、現貨漢堡盒、花藝設計、櫃檯收銀與跨站管理總控台</p>
-      <a href="https://github.com/a0952015080-netizen" target="_blank" rel="noopener" class="github-link-pill">
-        <span>👨‍💻 a0952015080-netizen on GitHub</span>
-        <span>↗</span>
-      </a>
-    </section>
+    </div>
 
-    <!-- Search & Filter Controls -->
-    <section class="controls-wrap">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="搜尋功能、品項或關鍵字..." oninput="handleSearch()">
+    <!-- 區塊 1：每日高頻收銀結帳 -->
+    <div class="section-title">
+      <span>💵 門市結帳收銀</span>
+    </div>
+
+    <div class="grid">
+      <!-- 1. 櫃檯快速結帳系統 (快捷鍵 1) -->
+      <div class="card card-cashier" data-index="1">
+        <div class="card-top">
+          <div class="card-icon">💳</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">每日收銀</span>
+              <span class="badge-hotkey">快捷鍵 1</span>
+            </div>
+            <h2 class="card-title">櫃檯快速結帳系統</h2>
+          </div>
+        </div>
+        <p class="card-desc">門市現場結帳收銀、總金額快速計算、品項明細加總，適用每日門市接待顧客直接收款。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/wuyi-cashier/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-cashier/">
+            <span>前往結帳</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-cashier/', '櫃檯結帳系統')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('櫃檯快速結帳系統', 'https://a0952015080-netizen.github.io/wuyi-cashier/')">
+            📱 QR Code
+          </button>
+        </div>
       </div>
-      <div class="filter-pills" id="filterPills">
-        <button class="pill-btn active" data-filter="all" onclick="setFilter('all')">全部功能</button>
-        <button class="pill-btn" data-filter="customer" onclick="setFilter('customer')">🎂 顧客訂購</button>
-        <button class="pill-btn" data-filter="store" onclick="setFilter('store')">💳 門市內部</button>
-        <button class="pill-btn" data-filter="wip" onclick="setFilter('wip')">🚧 施工中</button>
+    </div>
+
+    <!-- 區塊 2：花藝服務 -->
+    <div class="section-title">
+      <span>🌸 花藝專區</span>
+    </div>
+
+    <div class="grid">
+      <!-- 2. 門市花束預訂 (快捷鍵 2) -->
+      <div class="card card-flower" data-index="2">
+        <div class="card-top">
+          <div class="card-icon">💐</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">花束服務</span>
+              <span class="badge-hotkey">快捷鍵 2</span>
+            </div>
+            <h2 class="card-title">門市花束預訂系統</h2>
+          </div>
+        </div>
+        <p class="card-desc">花藝線上預訂、花束規格與客製色系登記，支援 LINE 訂單資訊快速發送給客人確認。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/wuyi-flower2/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-flower2/">
+            <span>前往花束預訂</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-flower2/', '門市花束預訂')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('門市花束預訂系統', 'https://a0952015080-netizen.github.io/wuyi-flower2/')">
+            📱 QR Code
+          </button>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Services Grid -->
-    <main class="grid" id="servicesGrid">
-      <!-- Generated by JavaScript -->
-    </main>
+    <!-- 區塊 3：烘焙甜點與蛋糕預訂 -->
+    <div class="section-title">
+      <span>🍰 蛋糕與甜點預訂專區</span>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>© 2026 WUYI 梧藝 · All Rights Reserved.</p>
-      <p style="margin-top: 4px;">由 GitHub Pages 快速分發部署</p>
-    </footer>
-  </div>
+    <div class="grid">
+      <!-- 3. 現貨漢堡盒 (快捷鍵 3) -->
+      <div class="card card-burger" data-index="3">
+        <div class="card-top">
+          <div class="card-icon">🍔</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">今日現貨</span>
+              <span class="badge-hotkey">快捷鍵 3</span>
+            </div>
+            <h2 class="card-title">現貨漢堡盒</h2>
+          </div>
+        </div>
+        <p class="card-desc">當日限定現貨漢堡盒蛋糕登記與即時預留，適合顧客當天來電或現場洽詢現貨時操作。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/wuyi-burger/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-burger/">
+            <span>前往現貨登記</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-burger/', '現貨漢堡盒')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('現貨漢堡盒', 'https://a0952015080-netizen.github.io/wuyi-burger/')">
+            📱 QR Code
+          </button>
+        </div>
+      </div>
 
-  <!-- QR Code Modal -->
-  <div class="modal-overlay" id="qrModal" onclick="closeQrModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeQrModal()">&times;</button>
-      <h3 id="qrModalTitle" style="font-size: 17px; font-weight: 700; margin-bottom: 4px;">QR Code 快速掃描</h3>
-      <p style="font-size: 13px; color: var(--text-sub);">手機相機掃描即可快速開啟此網頁</p>
-      <div class="qr-container" id="qrContainer"></div>
-      <div class="modal-url" id="qrModalUrl"></div>
+      <!-- 4. 蛋糕訂購 (快捷鍵 4) -->
+      <div class="card card-cake-custom" data-index="4">
+        <div class="card-top">
+          <div class="card-icon">🎂</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">客製與預約</span>
+              <span class="badge-hotkey">快捷鍵 4</span>
+            </div>
+            <h2 class="card-title">蛋糕訂購</h2>
+          </div>
+        </div>
+        <p class="card-desc">節慶蛋糕、指定日期自取預約、客製需求與造型蛋糕登記，後台管理與完整預約填寫。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/wuyi-order/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-order/">
+            <span>前往蛋糕訂購</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-order/', '蛋糕訂購')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('蛋糕訂購', 'https://a0952015080-netizen.github.io/wuyi-order/')">
+            📱 QR Code
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. 當週公版蛋糕 (快捷鍵 5) -->
+      <div class="card card-cake-week" data-index="5">
+        <div class="card-top">
+          <div class="card-icon">🍰</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">每週公版</span>
+              <span class="badge-hotkey">快捷鍵 5</span>
+            </div>
+            <h2 class="card-title">當週公版蛋糕</h2>
+          </div>
+        </div>
+        <p class="card-desc">本週常態公版蛋糕款式選單、口味及尺寸預購表單，供顧客挑選本週固定版型蛋糕。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/wuyi-cakethisweek/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-cakethisweek/">
+            <span>前往公版訂購</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-cakethisweek/', '當週公版蛋糕')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('當週公版蛋糕', 'https://a0952015080-netizen.github.io/wuyi-cakethisweek/')">
+            📱 QR Code
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 區塊 4：報價與核算專區 -->
+    <div class="section-title">
+      <span>🧮 報價與核算專區</span>
+    </div>
+
+    <div class="grid">
+      <!-- 6. 訂單報價小幫手 (快捷鍵 6) -->
+      <div class="card card-quote" data-index="6">
+        <div class="card-top">
+          <div class="card-icon">🧮</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">報價試算</span>
+              <span class="badge-hotkey">快捷鍵 6</span>
+            </div>
+            <h2 class="card-title">訂單報價小幫手</h2>
+          </div>
+        </div>
+        <p class="card-desc">快速規格核算、訂單項目加總與金額試算，適合顧客臨櫃或線上洽詢客製規格時報價。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/wuyi-quote-calculator/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-quote-calculator/">
+            <span>前往報價小幫手</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-quote-calculator/', '訂單報價小幫手')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('訂單報價小幫手', 'https://a0952015080-netizen.github.io/wuyi-quote-calculator/')">
+            📱 QR Code
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 櫃檯實用交接備忘錄 -->
+    <div class="counter-tools-section">
+      <div class="tool-box">
+        <div class="tool-box-header">
+          <span class="tool-box-title">📝 櫃檯交接備忘錄</span>
+          <button class="btn-tool" style="padding: 4px 10px; font-size: 0.76rem;" onclick="clearMemo()">清空備忘</button>
+        </div>
+        <textarea id="counterMemo" class="tool-memo-area" placeholder="早晚班交接記事、臨時預約備忘（例如：陳小姐下午4點自取玫瑰、今日紅玫瑰剩3束）..."></textarea>
+        <div class="tool-memo-status" id="memoStatus">已自動保存於本機</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- QR Code 彈窗 Modal -->
+  <div class="modal-backdrop" id="qrModalBackdrop" onclick="closeQrModal(event)">
+    <div class="qr-modal" onclick="event.stopPropagation()">
+      <h3 class="qr-title" id="modalTitle">系統名稱</h3>
+      <p class="qr-subtitle">請顧客以手機相機直接掃描</p>
+      
+      <div class="qr-frame">
+        <img id="modalQrImage" class="qr-image" src="" alt="QR Code">
+      </div>
+      
+      <div class="qr-url-text" id="modalUrlText">https://...</div>
+      
+      <div class="qr-modal-buttons">
+        <button class="btn-modal-close" onclick="closeQrModal()">關閉 (ESC)</button>
+        <button class="btn-modal-copy" id="modalCopyBtn" onclick="copyModalLink()">📋 複製網址</button>
+      </div>
     </div>
   </div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast">
-    <span>✅</span>
-    <span id="toastMsg">已複製連結到剪貼簿！</span>
-  </div>
+  <!-- 提示浮動框 -->
+  <div id="toast">✓ 已成功複製連結</div>
+
+  <!-- 頁尾 -->
+  <footer>
+    WUYI 梧藝 • 門市內部工作台 ｜ 專為櫃檯員工操作設計
+  </footer>
 
   <script>
-    // 系統與網頁資料庫定義
-    const SERVICES = [
-      {
-        id: 'wuyi-burger',
-        title: '現貨漢堡盒｜當日預留表單',
-        sub: '今日限定・現貨搶訂',
-        desc: '提供當日限定現貨漢堡盒蛋糕線上預留登記，避免現場久候或售罄。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-burger/',
-        icon: '🍔',
-        color: '#f59e0b',
-        bgColor: 'rgba(245, 158, 11, 0.12)',
-        category: 'customer',
-        badge: '今日限定 🔥',
-        status: 'active',
-        tags: ['現貨蛋糕', '漢堡盒', '當日預留', '即時登記']
-      },
-      {
-        id: 'wuyi-cakethisweek',
-        title: '當週公版蛋糕訂購',
-        sub: 'Wuyi Cake 🎂 本週款式',
-        desc: '展示並預訂本週最新出爐的熱門公版蛋糕，造型經典、口味豐富。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-cakethisweek/',
-        icon: '🎂',
-        color: '#ec4899',
-        bgColor: 'rgba(236, 72, 153, 0.12)',
-        category: 'customer',
-        badge: '每週更新 ✨',
-        status: 'active',
-        tags: ['公版蛋糕', '熱銷款', '當週限定', '線上挑選']
-      },
-      {
-        id: 'wuyi-order',
-        title: 'WUYI 蛋糕訂購預訂單',
-        sub: '完整訂單・客製預約',
-        desc: '客製化蛋糕與預約取貨之詳細表單，完整記錄顧客特殊需求與取件時間。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-order/',
-        icon: '📝',
-        color: '#6366f1',
-        bgColor: 'rgba(99, 102, 241, 0.12)',
-        category: 'customer',
-        badge: '完整預訂 📋',
-        status: 'active',
-        tags: ['蛋糕客製', '取貨預約', '完整表單', '詳細確認']
-      },
-      {
-        id: 'wuyi-admin',
-        title: 'WUYI 4 大專案跨網站總控台',
-        sub: '單一後台・即時同步・店長管理',
-        desc: '店長身分驗證專用跨網站管理總控台，一鍵即時調整與同步全店所有專案訂單系統設定。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-admin/',
-        icon: '⚙️',
-        color: '#62502d',
-        bgColor: 'rgba(98, 80, 45, 0.12)',
-        category: 'store',
-        badge: '店長總控 🔑',
-        status: 'active',
-        tags: ['跨網站總控', '店長後台', '專案管理', '系統同步']
-      },
-      {
-        id: 'wuyi-cashier',
-        title: 'WUYI 櫃檯快速結帳系統',
-        sub: '梧藝門市 • 快速 POS 收銀',
-        desc: '門市人員櫃檯專用，提供快速商品點選、金額試算與現場合計結帳作業。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-cashier/',
-        icon: '💳',
-        color: '#10b981',
-        bgColor: 'rgba(16, 185, 129, 0.12)',
-        category: 'store',
-        badge: '門市專用 🏬',
-        status: 'active',
-        tags: ['收銀機', '門市結帳', '內部POS', '快速計算']
-      },
-      {
-        id: 'wuyi-quote-calculator',
-        title: '訂單報價小幫手 (內部小工具)',
-        sub: '花束・蛋糕・加購配件快速報價',
-        desc: '迅速計算花束、餐具、造型蠟燭加購總金額，並自動生成格式化 LINE 報價文案。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-quote-calculator/',
-        icon: '🧾',
-        color: '#06b6d4',
-        bgColor: 'rgba(6, 182, 212, 0.12)',
-        category: 'store',
-        badge: '內部工具 ⚡',
-        status: 'active',
-        tags: ['報價計算', 'LINE複製', '花束加購', '快速回覆']
-      },
-      {
-        id: 'wuyi-flower2',
-        title: 'WUYI 梧藝花藝｜線上花束預訂',
-        sub: '門市花束預訂・LINE發送',
-        desc: '嚴選花束與當季花禮線上選購預約系統，目前正在積極建置與優化中。',
-        url: 'https://a0952015080-netizen.github.io/wuyi-flower2/',
-        icon: '🌸',
-        color: '#a855f7',
-        bgColor: 'rgba(168, 85, 247, 0.12)',
-        category: 'wip',
-        badge: '未完成・施工中 🚧',
-        status: 'wip',
-        tags: ['花藝選購', '花束客製', '施工中', '即將上線']
-      }
-    ];
+    // 網址清單對應快捷鍵 1~6（精準支援鍵盤快速鍵）
+    const linksByIndex = {
+      '1': 'https://a0952015080-netizen.github.io/wuyi-cashier/',          // 1. 櫃檯快速結帳系統
+      '2': 'https://a0952015080-netizen.github.io/wuyi-flower2/',          // 2. 門市花束預訂系統
+      '3': 'https://a0952015080-netizen.github.io/wuyi-burger/',           // 3. 現貨漢堡盒
+      '4': 'https://a0952015080-netizen.github.io/wuyi-order/',             // 4. 蛋糕訂購
+      '5': 'https://a0952015080-netizen.github.io/wuyi-cakethisweek/',      // 5. 當週公版蛋糕
+      '6': 'https://a0952015080-netizen.github.io/wuyi-quote-calculator/'   // 6. 訂單報價小幫手
+    };
 
-    let currentFilter = 'all';
-    let searchQuery = '';
+    // 另開分頁設定管理
+    const openNewTabCheckbox = document.getElementById('openNewTab');
+    const appLinks = document.querySelectorAll('.app-link');
 
-    // Render Cards
-    function renderCards() {
-      const grid = document.getElementById('servicesGrid');
-      const filtered = SERVICES.filter(item => {
-        // Category Filter
-        if (currentFilter === 'customer' && item.category !== 'customer') return false;
-        if (currentFilter === 'store' && item.category !== 'store') return false;
-        if (currentFilter === 'wip' && item.status !== 'wip') return false;
-
-        // Search Filter
-        if (searchQuery.trim() !== '') {
-          const q = searchQuery.toLowerCase();
-          const matchTitle = item.title.toLowerCase().includes(q);
-          const matchSub = item.sub.toLowerCase().includes(q);
-          const matchDesc = item.desc.toLowerCase().includes(q);
-          const matchTags = item.tags.some(t => t.toLowerCase().includes(q));
-          return matchTitle || matchSub || matchDesc || matchTags;
+    function updateLinkTargets() {
+      const isNewTab = openNewTabCheckbox.checked;
+      appLinks.forEach(link => {
+        if (isNewTab) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          link.removeAttribute('target');
+          link.removeAttribute('rel');
         }
-
-        return true;
       });
+      localStorage.setItem('wuyi_open_new_tab', isNewTab ? '1' : '0');
+    }
 
-      if (filtered.length === 0) {
-        grid.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 48px 16px; background: var(--card-bg); border-radius: var(--radius); border: 1px dashed var(--card-border);">
-            <div style="font-size: 36px; margin-bottom: 12px;">🔍</div>
-            <div style="font-size: 16px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">查無符合的系統或功能</div>
-            <div style="font-size: 13px; color: var(--text-muted);">請嘗試更換關鍵字或點選「全部功能」分類</div>
-          </div>
-        `;
+    const savedPref = localStorage.getItem('wuyi_open_new_tab');
+    if (savedPref !== null) {
+      openNewTabCheckbox.checked = (savedPref === '1');
+    }
+    updateLinkTargets();
+    openNewTabCheckbox.addEventListener('change', updateLinkTargets);
+
+    // 鍵盤數字快捷鍵 1~6
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('qrModalBackdrop');
+      const isModalOpen = modal.classList.contains('show');
+
+      if (e.key === 'Escape' && isModalOpen) {
+        closeQrModal();
         return;
       }
 
-      grid.innerHTML = filtered.map(item => {
-        const isWip = item.status === 'wip';
-        const badgeClass = isWip ? 'badge-wip' : 'badge-active';
-        const buttonText = isWip ? '搶先檢視 (施工中) ↗' : '立即前往 ↗';
-        const btnMainClass = isWip ? 'btn-main is-wip-btn' : 'btn-main';
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      if (isModalOpen) return;
+      
+      const key = e.key;
+      if (linksByIndex[key]) {
+        const targetUrl = linksByIndex[key];
+        if (openNewTabCheckbox.checked) {
+          window.open(targetUrl, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = targetUrl;
+        }
+      }
+    });
 
-        const tagsHtml = item.tags.map(tag => `<span class="tag-item">#${tag}</span>`).join('');
-
-        return `
-          <article class="service-card ${isWip ? 'is-wip' : ''}">
-            <div class="card-stripe" style="background: ${item.color}"></div>
-            <div>
-              <div class="card-top">
-                <div class="icon-box" style="background: ${item.bgColor}; color: ${item.color};">
-                  ${item.icon}
-                </div>
-                <span class="badge-pill ${badgeClass}">${item.badge}</span>
-              </div>
-              <div class="card-body">
-                <h2 class="card-title">${item.title}</h2>
-                <div style="font-size: 12px; font-weight: 600; color: ${item.color}; margin-bottom: 6px;">${item.sub}</div>
-                <p class="card-desc">${item.desc}</p>
-                <div class="tag-list">${tagsHtml}</div>
-              </div>
-            </div>
-
-            <div class="card-footer">
-              <a href="${item.url}" target="_blank" rel="noopener" class="${btnMainClass}">
-                ${buttonText}
-              </a>
-              <button class="btn-sub" title="複製連結" onclick="copyLink('${item.url}', '${item.title}')">
-                📋
-              </button>
-              <button class="btn-sub" title="產生 QR Code" onclick="openQrModal('${item.title}', '${item.url}')">
-                📱
-              </button>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    // Set Filter
-    function setFilter(filter) {
-      currentFilter = filter;
-      document.querySelectorAll('.pill-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === filter);
-      });
-      renderCards();
-    }
-
-    // Handle Search
-    function handleSearch() {
-      searchQuery = document.getElementById('searchInput').value;
-      renderCards();
-    }
-
-    // Copy Link with Toast
-    function copyLink(url, name) {
-      const fullUrl = url.startsWith('http') ? url : new URL(url, window.location.href).href;
+    // 複製連結小工具
+    let toastTimeout = null;
+    function copyLink(url, label) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fullUrl).then(() => {
-          showToast(`已複製「${name}」連結！`);
+        navigator.clipboard.writeText(url).then(() => {
+          showToast(`✓ 已複製「${label}」至剪貼簿`);
         }).catch(() => {
-          fallbackCopy(fullUrl, name);
+          fallbackCopy(url, label);
         });
       } else {
-        fallbackCopy(fullUrl, name);
+        fallbackCopy(url, label);
       }
     }
 
-    function fallbackCopy(text, name) {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
+    function fallbackCopy(url, label) {
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
       try {
         document.execCommand('copy');
-        showToast(`已複製「${name}」連結！`);
+        showToast(`✓ 已複製「${label}」至剪貼簿`);
       } catch (err) {
-        showToast('複製失敗，請手動複製網址');
+        prompt('請手動複製連結：', url);
       }
-      document.body.removeChild(ta);
+      document.body.removeChild(textarea);
     }
 
-    // Toast
-    let toastTimeout;
-    function showToast(msg) {
+    function showToast(message) {
       const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMsg');
-      toastMsg.textContent = msg;
+      toast.textContent = message;
       toast.classList.add('show');
-      clearTimeout(toastTimeout);
+      if (toastTimeout) clearTimeout(toastTimeout);
       toastTimeout = setTimeout(() => {
         toast.classList.remove('show');
-      }, 2400);
+      }, 2200);
     }
 
-    // QR Code Modal
-    let qrInstance = null;
+    // QR Code 彈窗展示功能
+    let currentModalUrl = '';
+    let currentModalTitle = '';
+
     function openQrModal(title, url) {
-      const modal = document.getElementById('qrModal');
-      const fullUrl = url.startsWith('http') ? url : new URL(url, window.location.href).href;
-      document.getElementById('qrModalTitle').textContent = title;
-      document.getElementById('qrModalUrl').textContent = fullUrl;
-
-      const qrContainer = document.getElementById('qrContainer');
-      qrContainer.innerHTML = '';
+      currentModalTitle = title;
+      currentModalUrl = url;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalUrlText').textContent = url;
       
-      qrInstance = new QRCode(qrContainer, {
-        text: fullUrl,
-        width: 180,
-        height: 180,
-        colorDark: '#0f172a',
-        colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.M
-      });
+      const qrImg = document.getElementById('modalQrImage');
+      const primaryQr = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodeURIComponent(url)}`;
+      const fallbackQr = `https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=240&margin=2`;
 
-      modal.classList.add('active');
+      qrImg.onerror = function() {
+        if (this.src !== fallbackQr) {
+          this.src = fallbackQr;
+        }
+      };
+      qrImg.src = primaryQr;
+
+      document.getElementById('qrModalBackdrop').classList.add('show');
     }
 
-    function closeQrModal(e) {
-      document.getElementById('qrModal').classList.remove('active');
+    function closeQrModal() {
+      document.getElementById('qrModalBackdrop').classList.remove('show');
     }
 
-    // Theme Toggle
-    function toggleTheme() {
-      const isDark = document.body.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        document.body.removeAttribute('data-theme');
-        localStorage.setItem('wuyi_theme', 'light');
-      } else {
-        document.body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('wuyi_theme', 'dark');
+    function copyModalLink() {
+      copyLink(currentModalUrl, currentModalTitle);
+    }
+
+    // 即時時鐘與日期顯示
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+    function updateClock() {
+      const now = new Date();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const date = String(now.getDate()).padStart(2, '0');
+      const day = weekDays[now.getDay()];
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      document.getElementById('clockDate').textContent = `${month}月${date}日 (週${day})`;
+      document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 櫃檯交接備忘錄 (自動儲存於 localStorage)
+    const memoTextarea = document.getElementById('counterMemo');
+    const memoStatus = document.getElementById('memoStatus');
+    const savedMemo = localStorage.getItem('wuyi_counter_memo');
+    if (savedMemo) {
+      memoTextarea.value = savedMemo;
+    }
+
+    let memoSaveTimer = null;
+    memoTextarea.addEventListener('input', () => {
+      memoStatus.textContent = '儲存中...';
+      clearTimeout(memoSaveTimer);
+      memoSaveTimer = setTimeout(() => {
+        localStorage.setItem('wuyi_counter_memo', memoTextarea.value);
+        memoStatus.textContent = '✓ 已自動保存於本機';
+      }, 500);
+    });
+
+    function clearMemo() {
+      if (confirm('確定要清空交接備忘錄嗎？')) {
+        memoTextarea.value = '';
+        localStorage.removeItem('wuyi_counter_memo');
+        memoStatus.textContent = '備忘錄已清空';
       }
     }
-
-    // Initialize Theme & Render
-    (function init() {
-      const savedTheme = localStorage.getItem('wuyi_theme');
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.body.setAttribute('data-theme', 'dark');
-      }
-      renderCards();
-    })();
   </script>
 </body>
 </html>
