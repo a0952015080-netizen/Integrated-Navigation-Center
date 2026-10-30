@@ -35,6 +35,8 @@
       --color-quote-bg: #f0f9ff;
       --color-print: #0f766e;
       --color-print-bg: #f0fdfa;
+      --color-order-print: #4f46e5;
+      --color-order-print-bg: #eef2ff;
     }
 
     * {
@@ -401,6 +403,11 @@
     .card-print .btn-primary { background: #0f766e; }
     .card-print .btn-primary:hover { background: #115e59; }
 
+    .card-order-print .card-icon { background: var(--color-order-print-bg); color: var(--color-order-print); }
+    .card-order-print .badge-category { background: var(--color-order-print-bg); color: var(--color-order-print); }
+    .card-order-print .btn-primary { background: #4f46e5; }
+    .card-order-print .btn-primary:hover { background: #4338ca; }
+
     /* 櫃檯輔助工具面板 (交接備忘錄) */
     .counter-tools-section {
       margin-top: 28px;
@@ -658,7 +665,7 @@
     <!-- 櫃檯操作小提示 -->
     <div class="quick-tip-banner">
       <div>
-        💡 <strong>櫃檯快捷操作：</strong>鍵盤按數字鍵 <kbd>1</kbd> ~ <kbd>7</kbd> 秒開系統；點擊<strong>「QR Code」</strong>可展示給現場客人手機掃碼。
+        💡 <strong>櫃檯快捷操作：</strong>鍵盤按數字鍵 <kbd>1</kbd> ~ <kbd>8</kbd> 秒開系統；點擊<strong>「QR Code」</strong>可展示給現場客人手機掃碼。
       </div>
     </div>
 
@@ -754,10 +761,10 @@
             <span>前往現貨登記</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-burger/?v=2', '現貨漢堡盒')">
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-burger/', '現貨漢堡盒')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('現貨漢堡盒', 'https://a0952015080-netizen.github.io/wuyi-burger/?v=2')">
+          <button class="btn-tool" onclick="openQrModal('現貨漢堡盒', 'https://a0952015080-netizen.github.io/wuyi-burger/')">
             📱 QR Code
           </button>
         </div>
@@ -877,6 +884,33 @@
           </button>
         </div>
       </div>
+
+      <!-- 8. 每日訂單列印 (快捷鍵 8) -->
+      <div class="card card-order-print" data-index="8">
+        <div class="card-top">
+          <div class="card-icon">🧾</div>
+          <div class="card-header-info">
+            <div class="card-tags">
+              <span class="badge-category">訂單列印</span>
+              <span class="badge-hotkey">快捷鍵 8</span>
+            </div>
+            <h2 class="card-title">每日訂單列印</h2>
+          </div>
+        </div>
+        <p class="card-desc">每日訂單明細彙整與排版列印，快速產出當日出貨與備貨工單，便於現場交接與出貨核對。</p>
+        <div class="card-actions">
+          <a href="https://a0952015080-netizen.github.io/Daily-order-printer/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/Daily-order-printer/">
+            <span>前往訂單列印</span>
+            <span>➔</span>
+          </a>
+          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/Daily-order-printer/', '每日訂單列印')">
+            📋 複製
+          </button>
+          <button class="btn-tool" onclick="openQrModal('每日訂單列印', 'https://a0952015080-netizen.github.io/Daily-order-printer/')">
+            📱 QR Code
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- 櫃檯實用交接備忘錄 -->
@@ -921,7 +955,7 @@
   </footer>
 
   <script>
-    // 網址清單對應快捷鍵 1~7（精準支援鍵盤快速鍵）
+    // 網址清單對應快捷鍵 1~8（精準支援鍵盤快速鍵）
     const linksByIndex = {
       '1': 'https://a0952015080-netizen.github.io/wuyi-cashier/',          // 1. 櫃檯快速結帳系統
       '2': 'https://a0952015080-netizen.github.io/wuyi-flower2/',          // 2. 門市花束預訂系統
@@ -929,7 +963,8 @@
       '4': 'https://a0952015080-netizen.github.io/wuyi-order/',             // 4. 蛋糕訂購
       '5': 'https://a0952015080-netizen.github.io/wuyi-cakethisweek/',      // 5. 當週公版蛋糕
       '6': 'https://a0952015080-netizen.github.io/wuyi-quote-calculator/',   // 6. 訂單報價小幫手
-      '7': 'https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/' // 7. 每日備忘轉 PDF 列印
+      '7': 'https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/', // 7. 每日備忘轉 PDF 列印
+      '8': 'https://a0952015080-netizen.github.io/Daily-order-printer/'     // 8. 每日訂單列印
     };
 
     // 另開分頁設定管理
@@ -957,7 +992,7 @@
     updateLinkTargets();
     openNewTabCheckbox.addEventListener('change', updateLinkTargets);
 
-    // 鍵盤數字快捷鍵 1~7
+    // 鍵盤數字快捷鍵 1~8
     window.addEventListener('keydown', (e) => {
       const modal = document.getElementById('qrModalBackdrop');
       const isModalOpen = modal.classList.contains('show');
