@@ -35,8 +35,6 @@
       --color-quote-bg: #f0f9ff;
       --color-print: #0f766e;
       --color-print-bg: #f0fdfa;
-      --color-order-print: #4f46e5;
-      --color-order-print-bg: #eef2ff;
     }
 
     * {
@@ -403,11 +401,6 @@
     .card-print .btn-primary { background: #0f766e; }
     .card-print .btn-primary:hover { background: #115e59; }
 
-    .card-order-print .card-icon { background: var(--color-order-print-bg); color: var(--color-order-print); }
-    .card-order-print .badge-category { background: var(--color-order-print-bg); color: var(--color-order-print); }
-    .card-order-print .btn-primary { background: #4f46e5; }
-    .card-order-print .btn-primary:hover { background: #4338ca; }
-
     /* 櫃檯輔助工具面板 (交接備忘錄) */
     .counter-tools-section {
       margin-top: 28px;
@@ -665,7 +658,7 @@
     <!-- 櫃檯操作小提示 -->
     <div class="quick-tip-banner">
       <div>
-        💡 <strong>櫃檯快捷操作：</strong>鍵盤按數字鍵 <kbd>1</kbd> ~ <kbd>8</kbd> 秒開系統；點擊<strong>「QR Code」</strong>可展示給現場客人手機掃碼。
+        💡 <strong>櫃檯快捷操作：</strong>鍵盤按數字鍵 <kbd>1</kbd> ~ <kbd>7</kbd> 秒開系統；點擊<strong>「QR Code」</strong>可展示給現場客人手機掃碼。
       </div>
     </div>
 
@@ -689,14 +682,14 @@
         </div>
         <p class="card-desc">門市現場結帳收銀、總金額快速計算、品項明細加總，適用每日門市接待顧客直接收款。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/wuyi-cashier/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-cashier/">
+          <a href="https://wuyi-studio.github.io/wuyi-cashier/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/wuyi-cashier/">
             <span>前往結帳</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-cashier/', '櫃檯結帳系統')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/wuyi-cashier/', '櫃檯結帳系統')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('櫃檯快速結帳系統', 'https://a0952015080-netizen.github.io/wuyi-cashier/')">
+          <button class="btn-tool" onclick="openQrModal('櫃檯快速結帳系統', 'https://wuyi-studio.github.io/wuyi-cashier/')">
             📱 QR Code
           </button>
         </div>
@@ -723,14 +716,14 @@
         </div>
         <p class="card-desc">花藝線上預訂、花束規格與客製色系登記，支援 LINE 訂單資訊快速發送給客人確認。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/wuyi-flower2/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-flower2/">
+          <a href="https://wuyi-studio.github.io/wuyi-flower2/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/wuyi-flower2/">
             <span>前往花束預訂</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-flower2/', '門市花束預訂')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/wuyi-flower2/', '門市花束預訂')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('門市花束預訂系統', 'https://a0952015080-netizen.github.io/wuyi-flower2/')">
+          <button class="btn-tool" onclick="openQrModal('門市花束預訂系統', 'https://wuyi-studio.github.io/wuyi-flower2/')">
             📱 QR Code
           </button>
         </div>
@@ -757,14 +750,14 @@
         </div>
         <p class="card-desc">當日限定現貨漢堡盒蛋糕登記與即時預留，適合顧客當天來電或現場洽詢現貨時操作。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/wuyi-burger/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-burger/">
+          <a href="https://wuyi-studio.github.io/wuyi-burger/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/wuyi-burger/">
             <span>前往現貨登記</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-burger/', '現貨漢堡盒')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/wuyi-burger/', '現貨漢堡盒')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('現貨漢堡盒', 'https://a0952015080-netizen.github.io/wuyi-burger/')">
+          <button class="btn-tool" onclick="openQrModal('現貨漢堡盒', 'https://wuyi-studio.github.io/wuyi-burger/')">
             📱 QR Code
           </button>
         </div>
@@ -784,14 +777,14 @@
         </div>
         <p class="card-desc">節慶蛋糕、指定日期自取預約、客製需求與造型蛋糕登記，後台管理與完整預約填寫。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/wuyi-order/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-order/">
+          <a href="https://wuyi-studio.github.io/wuyi-order/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/wuyi-order/">
             <span>前往蛋糕訂購</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-order/', '蛋糕訂購')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/wuyi-order/', '蛋糕訂購')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('蛋糕訂購', 'https://a0952015080-netizen.github.io/wuyi-order/')">
+          <button class="btn-tool" onclick="openQrModal('蛋糕訂購', 'https://wuyi-studio.github.io/wuyi-order/')">
             📱 QR Code
           </button>
         </div>
@@ -811,14 +804,14 @@
         </div>
         <p class="card-desc">本週常態公版蛋糕款式選單、口味及尺寸預購表單，供顧客挑選本週固定版型蛋糕。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/wuyi-cakethisweek/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-cakethisweek/">
+          <a href="https://wuyi-studio.github.io/wuyi-cakethisweek/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/wuyi-cakethisweek/">
             <span>前往公版訂購</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-cakethisweek/', '當週公版蛋糕')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/wuyi-cakethisweek/', '當週公版蛋糕')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('當週公版蛋糕', 'https://a0952015080-netizen.github.io/wuyi-cakethisweek/')">
+          <button class="btn-tool" onclick="openQrModal('當週公版蛋糕', 'https://wuyi-studio.github.io/wuyi-cakethisweek/')">
             📱 QR Code
           </button>
         </div>
@@ -845,14 +838,14 @@
         </div>
         <p class="card-desc">快速規格核算、訂單項目加總與金額試算，適合顧客臨櫃或線上洽詢客製規格時報價。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/wuyi-quote-calculator/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/wuyi-quote-calculator/">
+          <a href="https://wuyi-studio.github.io/wuyi-quote-calculator/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/wuyi-quote-calculator/">
             <span>前往報價小幫手</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/wuyi-quote-calculator/', '訂單報價小幫手')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/wuyi-quote-calculator/', '訂單報價小幫手')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('訂單報價小幫手', 'https://a0952015080-netizen.github.io/wuyi-quote-calculator/')">
+          <button class="btn-tool" onclick="openQrModal('訂單報價小幫手', 'https://wuyi-studio.github.io/wuyi-quote-calculator/')">
             📱 QR Code
           </button>
         </div>
@@ -872,41 +865,14 @@
         </div>
         <p class="card-desc">每日交接事項與備忘紀錄，支援快速排版與轉存 PDF / 紙本列印，方便交接存查與現場張貼。</p>
         <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/">
+          <a href="https://wuyi-studio.github.io/Daily-Memo-to-PDF-print/" class="btn-primary app-link" data-url="https://wuyi-studio.github.io/Daily-Memo-to-PDF-print/">
             <span>前往列印工具</span>
             <span>➔</span>
           </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/', '每日備忘轉 PDF 列印')">
+          <button class="btn-tool" onclick="copyLink('https://wuyi-studio.github.io/Daily-Memo-to-PDF-print/', '每日備忘轉 PDF 列印')">
             📋 複製
           </button>
-          <button class="btn-tool" onclick="openQrModal('每日備忘轉 PDF 列印', 'https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/')">
-            📱 QR Code
-          </button>
-        </div>
-      </div>
-
-      <!-- 8. 每日訂單列印 (快捷鍵 8) -->
-      <div class="card card-order-print" data-index="8">
-        <div class="card-top">
-          <div class="card-icon">🧾</div>
-          <div class="card-header-info">
-            <div class="card-tags">
-              <span class="badge-category">訂單列印</span>
-              <span class="badge-hotkey">快捷鍵 8</span>
-            </div>
-            <h2 class="card-title">每日訂單列印</h2>
-          </div>
-        </div>
-        <p class="card-desc">每日訂單明細彙整與排版列印，快速產出當日出貨與備貨工單，便於現場交接與出貨核對。</p>
-        <div class="card-actions">
-          <a href="https://a0952015080-netizen.github.io/Daily-order-printer/" class="btn-primary app-link" data-url="https://a0952015080-netizen.github.io/Daily-order-printer/">
-            <span>前往訂單列印</span>
-            <span>➔</span>
-          </a>
-          <button class="btn-tool" onclick="copyLink('https://a0952015080-netizen.github.io/Daily-order-printer/', '每日訂單列印')">
-            📋 複製
-          </button>
-          <button class="btn-tool" onclick="openQrModal('每日訂單列印', 'https://a0952015080-netizen.github.io/Daily-order-printer/')">
+          <button class="btn-tool" onclick="openQrModal('每日備忘轉 PDF 列印', 'https://wuyi-studio.github.io/Daily-Memo-to-PDF-print/')">
             📱 QR Code
           </button>
         </div>
@@ -955,16 +921,15 @@
   </footer>
 
   <script>
-    // 網址清單對應快捷鍵 1~8（精準支援鍵盤快速鍵）
+    // 網址清單對應快捷鍵 1~7（精準支援鍵盤快速鍵）
     const linksByIndex = {
-      '1': 'https://a0952015080-netizen.github.io/wuyi-cashier/',          // 1. 櫃檯快速結帳系統
-      '2': 'https://a0952015080-netizen.github.io/wuyi-flower2/',          // 2. 門市花束預訂系統
-      '3': 'https://a0952015080-netizen.github.io/wuyi-burger/',           // 3. 現貨漢堡盒
-      '4': 'https://a0952015080-netizen.github.io/wuyi-order/',             // 4. 蛋糕訂購
-      '5': 'https://a0952015080-netizen.github.io/wuyi-cakethisweek/',      // 5. 當週公版蛋糕
-      '6': 'https://a0952015080-netizen.github.io/wuyi-quote-calculator/',   // 6. 訂單報價小幫手
-      '7': 'https://a0952015080-netizen.github.io/Daily-Memo-to-PDF-print/', // 7. 每日備忘轉 PDF 列印
-      '8': 'https://a0952015080-netizen.github.io/Daily-order-printer/'     // 8. 每日訂單列印
+      '1': 'https://wuyi-studio.github.io/wuyi-cashier/',          // 1. 櫃檯快速結帳系統
+      '2': 'https://wuyi-studio.github.io/wuyi-flower2/',          // 2. 門市花束預訂系統
+      '3': 'https://wuyi-studio.github.io/wuyi-burger/',           // 3. 現貨漢堡盒
+      '4': 'https://wuyi-studio.github.io/wuyi-order/',             // 4. 蛋糕訂購
+      '5': 'https://wuyi-studio.github.io/wuyi-cakethisweek/',      // 5. 當週公版蛋糕
+      '6': 'https://wuyi-studio.github.io/wuyi-quote-calculator/',   // 6. 訂單報價小幫手
+      '7': 'https://wuyi-studio.github.io/Daily-Memo-to-PDF-print/' // 7. 每日備忘轉 PDF 列印
     };
 
     // 另開分頁設定管理
@@ -992,7 +957,7 @@
     updateLinkTargets();
     openNewTabCheckbox.addEventListener('change', updateLinkTargets);
 
-    // 鍵盤數字快捷鍵 1~8
+    // 鍵盤數字快捷鍵 1~7
     window.addEventListener('keydown', (e) => {
       const modal = document.getElementById('qrModalBackdrop');
       const isModalOpen = modal.classList.contains('show');
